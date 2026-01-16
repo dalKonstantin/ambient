@@ -7,7 +7,7 @@ mod traits;
 
 use crate::effects::GainEffect;
 use crate::engine::AudioEngine;
-use crate::generators::{SawOsc, SineOsc};
+use crate::generators::{SawOsc, SineOsc, SquareOsc};
 
 fn main() {
     println!("initializing engine");
@@ -19,7 +19,7 @@ fn main() {
 
     println!("Playing chord");
 
-    let sin1 = Box::new(SawOsc::new(440.0, sr));
+    let sin1 = Box::new(SawOsc::new(110.0, sr));
     let sin1_proc = Box::new(GainEffect::new(sin1, 0.7));
     player.play(sin1_proc);
     // player.play(Box::new(SineOsc::new(440.0, sr)));

@@ -50,3 +50,28 @@ impl AudioSource for SawOsc {
         value
     }
 }
+
+pub struct SquareOsc {
+    phase: f32,
+    frequency: f32,
+    sample_rate: f32,
+}
+
+impl SquareOsc {
+    pub fn new(freq: f32, sample_rate: f32) -> Self {
+        Self {
+            phase: 0.0,
+            frequency: freq,
+            sample_rate,
+        }
+    }
+}
+
+impl AudioSource for SquareOsc {
+    fn next_sample(&mut self) -> f32 {
+        let value = if self.phase < 0.5 { 1.0 } else { -1.0 };
+        self.phase = (self.phase + self.frequency / self.sample_rate) % 1.0;
+
+        value
+    }
+}
