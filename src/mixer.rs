@@ -1,3 +1,4 @@
+#![allow(unused)]
 use std::os;
 
 use crate::traits::AudioSource;

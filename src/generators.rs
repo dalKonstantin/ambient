@@ -1,3 +1,4 @@
+#![allow(unused)]
 use crate::{parameter::Parameter, traits::AudioSource};
 use std::f32::consts::PI;
 
@@ -76,5 +77,25 @@ impl AudioSource for SquareOsc {
         self.phase = (self.phase + curr_freq / self.sample_rate) % 1.0;
 
         value
+    }
+}
+
+pub struct NoiseOsc {
+    seed: u32,
+}
+
+impl NoiseOsc {
+    pub fn new(seed: u32) -> Self {
+        Self { seed: seed }
+    }
+}
+
+impl AudioSource for NoiseOsc {
+    fn next_sample(&mut self) -> f32 {
+        self.seed = self.seed.wrapping_mul(1103515245).wrapping_add(12345);
+
+        let value_0_1 = (self.seed as f32) / (u32::MAX as f32);
+
+        (value_0_1 * 2.0) - 1.0
     }
 }

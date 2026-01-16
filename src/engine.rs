@@ -1,7 +1,4 @@
-use std::{
-    cmp::Reverse,
-    sync::mpsc::{Receiver, Sender, channel},
-};
+use std::sync::mpsc::{Receiver, Sender, channel};
 
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
 
@@ -96,4 +93,3 @@ where
         )
         .unwrap()
 }
-
